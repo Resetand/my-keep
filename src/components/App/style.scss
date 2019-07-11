@@ -1,0 +1,40 @@
+.g-container {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 360px 1fr 1fr;
+  grid-template-rows: 100px 1fr 1fr;
+  grid-gap: 3px;
+  grid-template-areas:
+    "sidebar   searchbar  searchbar"
+    "sidebar   main       main"
+    "sidebar   main       main";
+}
+
+.g-searchBar {
+  transition: 0.3s;
+  grid-area: searchbar;
+}
+.g-sideBar {
+  grid-area: sidebar;
+}
+.g-main {
+  transition: 0.3s;
+  grid-area: main;
+}
+.searchBar-menu {
+  transition: 0.2s;
+}
+.sideBar_off {
+  .g-sideBar .searchBar-menu {
+    transform: translateX(-360px);
+  }
+  .g-main {
+    transform: translateX(-100px);
+  }
+}
+
+.add-note {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}

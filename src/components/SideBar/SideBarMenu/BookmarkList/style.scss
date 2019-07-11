@@ -1,0 +1,35 @@
+.list-container {
+}
+.list-title {
+  font-weight: normal;
+  font-size: 15px;
+  position: relative;
+  padding-left: 15%;
+  color: rgba(0, 0, 0, 0.7);
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: calc(50% - 1px);
+    height: 1px;
+    width: 10%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: calc(50% - 1px);
+    height: 1px;
+    width: 50%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+.bookmark-list-item {
+  width: 92%;
+}
+
+.list-header {
+  cursor: pointer;
+  opacity: 1;
+}

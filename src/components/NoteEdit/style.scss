@@ -1,0 +1,37 @@
+.modal-body {
+  width: 60vw;
+  overflow: hidden;
+  padding: 20px 30px;
+}
+.note__body_edit {
+  height: auto;
+  min-height: 300px;
+  margin-bottom: 40px;
+}
+
+.modal {
+  border-radius: 40px;
+}
+.MuiPaper-rounded {
+  border-radius: 10px !important;
+}
+.label {
+  margin-left: 5px;
+}
+.add-label-input {
+  & input {
+    padding: 5px;
+    margin: 0 2px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(236, 229, 229);
+    outline: none;
+  }
+}
+.list-btn {
+  width: 90%;
+}
+.list-header {
+  margin-right: 150px;
+  line-height: 30px !important;
+}
