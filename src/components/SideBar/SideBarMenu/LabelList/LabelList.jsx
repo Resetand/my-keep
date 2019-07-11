@@ -12,10 +12,12 @@ export default function(props) {
     for (let label of labels) {
       array.push(
         <ListItem
+          dialog
+          selectedStyle
           key={label}
           icon={<Icon fontSize="small">label</Icon>}
           onClick={() => filterByLabel(label)}
-          omRemove={() => removeLabel(label)}
+          onRemove={() => removeLabel(label)}
           title={label}
         />
       );

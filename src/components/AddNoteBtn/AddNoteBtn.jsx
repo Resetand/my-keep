@@ -16,7 +16,12 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <Fab onClick={this.createNewNote} color="primary" aria-label="Add">
+        <Fab
+          className="add-note-btn"
+          color="inherit"
+          onClick={this.createNewNote}
+          aria-label="Add"
+        >
           <Icon>add</Icon>
         </Fab>
       </div>

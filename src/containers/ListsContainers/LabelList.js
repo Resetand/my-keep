@@ -2,9 +2,9 @@ import { connect } from "react-redux";
 
 import UIComponent from "../../components/SideBar/SideBarMenu/LabelList";
 
-import * as notesActions from "../../actions/notesActions";
-import * as editActions from "../../actions/currentEditNoteActions";
+import * as filterActions from "../../actions/filterNotesActions";
 import * as labelsActions from "../../actions/labelsActions";
+import * as noteActions from "../../actions/notesActions";
 
 const mapState = state => ({
   labels: state.labels
@@ -12,9 +12,12 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   filterByLabel: label => {
-    console.log("ЗДесь будет сложный диспатч");
+    dispatch(filterActions.setLabelFilterAction(label));
   },
-  removeLabel: label => {}
+  removeLabel: label => {
+    dispatch(labelsActions.removeLabelAction(label));
+    dispatch(noteActions.removeLabelFromNotesAction(label));
+  }
 });
 
 export default connect(

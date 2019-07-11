@@ -1,4 +1,12 @@
-const initialState = {};
+const initialState = {
+  0: {
+    title: "Заголовок",
+    body: "Напишите сюда что-то",
+    id: 0,
+    bookmark: true,
+    labels: []
+  }
+};
 export default function(state = initialState, { type, payload }) {
   switch (type) {
     case "ADD_LABEL":
@@ -25,6 +33,18 @@ export default function(state = initialState, { type, payload }) {
           ]
         }
       };
+    case "REMOVE_LABEL_FOR_NOTES":
+      return Object.keys(state).reduce(
+        (newState, id) => {
+          const labels = state[id].labels.filter(
+            label => label !== payload.label
+          );
+          newState[id].labels = labels;
+          return newState;
+        },
+        { ...state }
+      );
+
     case "SET_NOTES":
       return { ...payload.notes };
     case "EDIT_NOTE":

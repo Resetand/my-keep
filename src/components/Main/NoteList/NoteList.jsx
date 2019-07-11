@@ -4,7 +4,7 @@ import "./style.scss";
 
 export default class extends Component {
   componentDidMount() {
-    this.props.getNotes(20);
+    this.props.getNotes(50);
   }
   render() {
     const { editHandle, removeHandle, bookmarkHandle, noteList } = this.props;

@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
+
 import Labels from "./Labels";
+import Body from "./Body";
 import "./style.scss";
 
 export default class extends Component {
@@ -33,12 +35,10 @@ export default class extends Component {
       strIsEmpty(this.state.currentTitle) &&
       strIsEmpty(this.state.currentBody)
     ) {
-      console.log("Пустая - сносим");
       this.props.removeHandle(this.props.id);
     }
   };
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps.open !== this.props.open) {
       this.setState({
         currentTitle: nextProps.title,
@@ -54,7 +54,7 @@ export default class extends Component {
     console.log("ТЫЫЫЫК");
   };
   removeLabel = label => {
-    this.props.removeLabel(this.props.id, label);
+    this.props.removeLabel(this.props.id, label, this.props.noteList);
   };
   render() {
     const {
@@ -64,8 +64,10 @@ export default class extends Component {
       bookmark,
       closeModal,
       open,
-      labels
+      labels,
+      labelList
     } = this.props;
+    console.log(labels);
     if (!this.props.open) return null;
     return (
       <div>
@@ -76,27 +78,15 @@ export default class extends Component {
           aria-describedby="alert-dialog-description"
           maxWidth="lg"
         >
-          <div className="modal-body">
-            <span className="note__bookmark">
-              <Icon>bookmark</Icon>
-            </span>
-            <div className="note__inner">
-              <input
-                autoFocus
-                placeholder="Введите название ..."
-                onChange={this.titleChange}
-                value={this.state.currentTitle}
-                className="note__title"
-              />
-              <textarea
-                placeholder="Начните писать ..."
-                onChange={this.bodyChange}
-                value={this.state.currentBody}
-                className="note__body note__body_edit"
-              />
-            </div>
-            {/* labels, addLabel, removeLabel, clickLabel */}
+          <div className="modal-body note__body_lg">
+            <Body
+              title={this.state.currentTitle}
+              body={this.state.currentBody}
+              titleChange={this.titleChange}
+              bodyChange={this.bodyChange}
+            />
             <Labels
+              labelList={labelList}
               labels={labels}
               addLabel={this.saveLabel}
               removeLabel={this.removeLabel}
@@ -128,6 +118,7 @@ export default class extends Component {
 }
 
 function strIsEmpty(str) {
+  if (!str) return true;
   return (
     str
       .split("")

@@ -1,0 +1,12 @@
+.labels {
+  display: flex;
+  width: 85%;
+  flex-wrap: wrap;
+  left: 20px;
+  position: absolute;
+  bottom: 10px;
+  height: auto;
+}
+.note__body_lg {
+  overflow: auto !important;
+}

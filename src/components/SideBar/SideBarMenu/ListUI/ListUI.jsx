@@ -12,7 +12,6 @@ export default class extends Component {
   };
   render() {
     const { open } = this.state;
-    console.log(1, this.props);
     return (
       <div className="list-container">
         <Button

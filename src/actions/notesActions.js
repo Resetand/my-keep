@@ -54,3 +54,9 @@ export const removeLabelAction = (id, label) => {
     payload: { id, label }
   };
 };
+export const removeLabelFromNotesAction = label => {
+  return {
+    type: "REMOVE_LABEL_FOR_NOTES",
+    payload: { label }
+  };
+};

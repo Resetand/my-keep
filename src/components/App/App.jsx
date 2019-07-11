@@ -22,7 +22,7 @@ export default class extends Component {
     return (
       <div
         className={`g-container ${
-          this.state.sideBarIsOpen ? null : "sideBar_off"
+          this.state.sideBarIsOpen ? "" : "sideBar_off"
         }`}
       >
         <EditNote />

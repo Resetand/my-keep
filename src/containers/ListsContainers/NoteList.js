@@ -7,20 +7,9 @@ import * as editActions from "../../actions/currentEditNoteActions";
 import * as labelsActions from "../../actions/labelsActions";
 
 import serverAPI from "../../serverAPI";
+import storage from "../../localStorageAPI";
 
-const filterNotes = (notes, filter) => {
-  if (!filter) return notes;
-
-  return Object.keys(notes).reduce((visNotes, id) => {
-    if (
-      notes[id].body.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
-      notes[id].title.toLowerCase().indexOf(filter.toLowerCase()) > -1
-    ) {
-      visNotes[id] = notes[id];
-    }
-    return visNotes;
-  }, {});
-};
+import filterNotes from "../helpers/filter";
 
 const getLabelsFromNotes = notes => {
   return Object.keys(notes).reduce((labels, id) => {
@@ -36,16 +25,18 @@ const mapStateForVisible = state => {
 };
 const mapDispatchForVisible = dispatch => {
   return {
-    getNotes: count => {
-      const asyncGetNotes = () => {
+    getNotes: () => {
+      const getNotesFromLocalStorage = () => {
         return dispatch => {
-          serverAPI.getNotes(count).then(notes => {
+          const notes = storage.getNotes();
+          console.log(notes);
+          if (notes) {
             dispatch(notesActions.setNotesAction(notes));
             dispatch(labelsActions.setLabelsAction(getLabelsFromNotes(notes)));
-          });
+          }
         };
       };
-      dispatch(asyncGetNotes());
+      dispatch(getNotesFromLocalStorage());
     },
     editHandle: id => {
       dispatch(editActions.setNote(id));
