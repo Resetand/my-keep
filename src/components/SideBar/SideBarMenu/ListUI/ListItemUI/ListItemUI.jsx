@@ -9,14 +9,12 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogContent from "@material-ui/core/DialogContent";
 
 export default class extends Component {
   state = {
-    selected: false,
     isOpen: false
   };
+
   onClick = () => {
     this.props.onClick();
     if (this.props.selectedStyle) {
@@ -35,7 +33,7 @@ export default class extends Component {
     }
   };
   render() {
-    const { title, icon, onRemove } = this.props;
+    const { title, icon, onRemove, removeIcon } = this.props;
 
     return (
       <div className="bookmark-list-item">
@@ -44,7 +42,7 @@ export default class extends Component {
             {"Удалить ярлык: " + title}
           </DialogTitle>
           <DialogActions>
-            <Button onClick={this.toggleDialog} color="primary">
+            <Button  onClick={this.toggleDialog} color="primary">
               Нет
             </Button>
             <Button
@@ -59,14 +57,14 @@ export default class extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <ListItem selected={this.state.selected} button onClick={this.onClick}>
+        <ListItem selected={this.props.defaultSelected} button onClick={this.onClick}>
           <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText
             primary={title.length > 25 ? title.slice(0, 25) + "..." : title}
           />
           <ListItemSecondaryAction>
             <IconButton onClick={this.toggleDialog} size="small" edge="end">
-              <Icon fontSize="small">close</Icon>
+              {removeIcon || <Icon fontSize="small">close</Icon>}
             </IconButton>
           </ListItemSecondaryAction>
         </ListItem>

@@ -7,7 +7,8 @@ import * as labelsActions from "../../actions/labelsActions";
 import * as noteActions from "../../actions/notesActions";
 
 const mapState = state => ({
-  labels: state.labels
+  labels: state.labels,
+  currentFilter: state.noteListFilter
 });
 
 const mapDispatch = dispatch => ({

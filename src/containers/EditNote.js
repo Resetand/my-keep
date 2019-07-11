@@ -6,6 +6,7 @@ import store from "../store";
 import * as notesActions from "../actions/notesActions";
 import * as labelsActions from "../actions/labelsActions";
 import * as editActions from "../actions/currentEditNoteActions";
+import * as filterNotesActions from "../actions/filterNotesActions"
 
 const checkLabelExist = (notes, label) => {
   return Object.keys(notes).some(noteID => {
@@ -26,11 +27,14 @@ const mapStateToProps = state => {
 // editHandle, removeHandle, bookmarkHandle
 const mapDispatchToProps = dispatch => {
   return {
+    filerByLabel: label => {
+      dispatch(filterNotesActions.setLabelFilterAction(label));
+    },
     addLabel: (id, label) => {
       dispatch(notesActions.addLabelAction(id, label));
       dispatch(labelsActions.addLabelAction(label));
     },
-    removeLabel: (id, label, notes) => {
+    removeLabel: (id, label) => {
       dispatch(notesActions.removeLabelAction(id, label));
       if (!checkLabelExist(store.getState().noteList, label))
         dispatch(labelsActions.removeLabelAction(label));

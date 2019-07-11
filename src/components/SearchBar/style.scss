@@ -4,7 +4,7 @@
 }
 .search-input {
   background: #f8f7f7;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   border: none;
   font-size: 18px;
@@ -14,18 +14,30 @@
   color: rgba(0, 0, 0, 0.7);
   &:focus {
     background: #fff;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
     outline: none;
   }
 }
 .search-icon {
   position: absolute;
   opacity: 0.4;
-  top: 13px;
+  top: 10px;
   left: 16px;
 }
 
 .search-container {
   margin-right: 150px;
   padding: 30px 40px 30px 0;
+}
+.reset-bnt{
+  transition: .3s !important;
+}
+.search-form{
+  display: flex;
+  align-items: center;
+
+}
+.op-0{
+  visibility: hidden !important;
+  opacity: 0 !important;
 }

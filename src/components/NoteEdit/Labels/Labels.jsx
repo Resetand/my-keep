@@ -9,17 +9,16 @@ export default class Labels extends Component {
   state = {
     labelEditing: false,
     labelValue: "",
-    compliteHash: new Set()
+    compliteHash: new Set(),
+    cssEffect: false
   };
-  labelEditToggle = e => {
+  labelEditToggle = () => {
     this.setState(state => ({
       labelEditing: !state.labelEditing
     }));
   };
   resetValue = () => {
-    this.setState(state => ({
-      labelValue: ""
-    }));
+    this.setState({labelValue: ""});
   };
   saveLabel = () => {
     this.labelEditToggle();
@@ -50,10 +49,15 @@ export default class Labels extends Component {
       const val = value.toLowerCase();
       if (!hash.has(label) && label.toLowerCase().indexOf(val) > -1) {
         hash.add(label);
+        this.animateInput();
         return label;
       }
     }
     return value;
+  }
+  animateInput(){
+    this.setState({cssEffect: true
+    }, () => setTimeout(() => this.setState({cssEffect: false}), 800));
   }
   render() {
     const { labels, removeLabel, clickLabel } = this.props;
@@ -64,6 +68,7 @@ export default class Labels extends Component {
         <div className="labels">
           {labels.map(label => (
             <Chip
+              component={"div"}
               key={label}
               className="label"
               label={label}
@@ -84,7 +89,7 @@ export default class Labels extends Component {
                 onKeyPress={this.enterHandler}
                 autoFocus
                 value={labelValue}
-                className="add-label-input"
+                className={`${this.state.cssEffect ? "labelAnimate" : ""} add-label-input`}
               />
             </Tooltip>
           )}

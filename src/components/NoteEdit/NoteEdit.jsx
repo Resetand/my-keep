@@ -12,15 +12,9 @@ export default class extends Component {
     currentTitle: "",
     currentBody: "",
     labelValue: "",
-    labelEditing: false
   };
   titleChange = e => {
     this.setState({ currentTitle: e.target.value });
-  };
-  labelEditToggle = e => {
-    this.setState(state => ({
-      labelEditing: !state.labelEditing
-    }));
   };
   bodyChange = e => {
     this.setState({ currentBody: e.target.value });
@@ -31,6 +25,8 @@ export default class extends Component {
       title: this.state.currentTitle,
       body: this.state.currentBody
     });
+
+
     if (
       strIsEmpty(this.state.currentTitle) &&
       strIsEmpty(this.state.currentBody)
@@ -50,8 +46,9 @@ export default class extends Component {
     if (strIsEmpty(label)) return;
     this.props.addLabel(this.props.id, label);
   };
-  clickLabel = e => {
-    console.log("ТЫЫЫЫК");
+  clickLabel = label => {
+    this.close();
+    this.props.filerByLabel(label)
   };
   removeLabel = label => {
     this.props.removeLabel(this.props.id, label, this.props.noteList);
@@ -76,8 +73,7 @@ export default class extends Component {
           onClose={this.close}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          maxWidth="lg"
-        >
+          maxWidth="lg">
           <div className="modal-body note__body_lg">
             <Body
               title={this.state.currentTitle}
