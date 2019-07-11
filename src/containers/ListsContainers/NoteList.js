@@ -6,7 +6,6 @@ import * as notesActions from "../../actions/notesActions";
 import * as editActions from "../../actions/currentEditNoteActions";
 import * as labelsActions from "../../actions/labelsActions";
 
-import serverAPI from "../../serverAPI";
 import storage from "../../localStorageAPI";
 
 import filterNotes from "../helpers/filter";
