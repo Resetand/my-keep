@@ -16,30 +16,23 @@ export default class extends Component {
   titleChange = e => {
     this.setState({ currentTitle: e.target.value });
   };
-  bodyChange = e => {
-    this.setState({ currentBody: e.target.value });
+  bodyChange = ({ editObj, text }) => {
+    this.setState({ currentBody: { editObj, text } });
   };
   close = () => {
     this.props.closeModal();
     this.props.editHandle(this.props.id, {
       title: this.state.currentTitle,
-      body: this.state.currentBody
+      body: this.state.currentBody,
     });
 
-
-    if (
-      strIsEmpty(this.state.currentTitle) &&
-      strIsEmpty(this.state.currentBody)
-    ) {
+    if (!this.state.currentTitle && !this.state.currentBody.text) {
       this.props.removeHandle(this.props.id);
     }
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.open !== this.props.open) {
-      this.setState({
-        currentTitle: nextProps.title,
-        currentBody: nextProps.body
-      });
+      this.setState({ currentTitle: nextProps.title, currentBody: nextProps.body });
     }
   }
   saveLabel = label => {
@@ -48,7 +41,7 @@ export default class extends Component {
   };
   clickLabel = label => {
     this.close();
-    this.props.filerByLabel(label)
+    this.props.filerByLabel(label);
   };
   removeLabel = label => {
     this.props.removeLabel(this.props.id, label, this.props.noteList);
@@ -62,10 +55,10 @@ export default class extends Component {
       closeModal,
       open,
       labels,
-      labelList
+      labelList,
     } = this.props;
-    console.log(labels);
-    if (!this.props.open) return null;
+
+    if (!open) return null;
     return (
       <div>
         <Dialog
@@ -73,7 +66,8 @@ export default class extends Component {
           onClose={this.close}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          maxWidth="lg">
+          maxWidth="lg"
+        >
           <div className="modal-body note__body_lg">
             <Body
               title={this.state.currentTitle}
@@ -99,11 +93,7 @@ export default class extends Component {
               </IconButton>
 
               <IconButton onClick={() => bookmarkHandle(id)}>
-                {bookmark ? (
-                  <Icon> bookmark</Icon>
-                ) : (
-                  <Icon>bookmark_border</Icon>
-                )}
+                {bookmark ? <Icon> bookmark</Icon> : <Icon>bookmark_border</Icon>}
               </IconButton>
             </div>
           </div>

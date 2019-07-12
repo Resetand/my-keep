@@ -6,7 +6,7 @@ import store from "../store";
 import * as notesActions from "../actions/notesActions";
 import * as labelsActions from "../actions/labelsActions";
 import * as editActions from "../actions/currentEditNoteActions";
-import * as filterNotesActions from "../actions/filterNotesActions"
+import * as filterNotesActions from "../actions/filterNotesActions";
 
 const checkLabelExist = (notes, label) => {
   return Object.keys(notes).some(noteID => {
@@ -19,7 +19,7 @@ const mapStateToProps = state => {
     ? {
         ...state.noteList[state.currentEditNote],
         labelList: state.labels,
-        open: true
+        open: true,
       }
     : { open: false };
 };
@@ -50,7 +50,7 @@ const mapDispatchToProps = dispatch => {
     },
     closeModal: () => {
       dispatch(editActions.setNote(false));
-    }
+    },
   };
 };
 

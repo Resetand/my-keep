@@ -1,14 +1,15 @@
 .modal-body {
   width: 60vw;
-  overflow: hidden;
   padding: 20px 30px;
 }
 .note__body_edit {
   height: auto;
-  min-height: 300px;
+  min-height: 300px !important;
   margin-bottom: 40px;
 }
-
+.MuiDialog-paper{
+  overflow-y: unset !important;
+}
 .modal {
   border-radius: 40px;
 }
@@ -34,4 +35,8 @@
 .list-header {
   margin-right: 150px;
   line-height: 30px !important;
+}
+.labels{
+  bottom: 0;
+  padding-bottom: 18px;
 }

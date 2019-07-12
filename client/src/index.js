@@ -10,7 +10,7 @@ import "./assets/main.scss";
 window.onunload = () => {
   storage.putNotes(store.getState().noteList);
 };
-
+storage.clear();
 render(
   <Provider store={store}>
     <App />

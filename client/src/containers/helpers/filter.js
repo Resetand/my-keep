@@ -12,8 +12,8 @@ export default (notes, { type, filter }) => {
     case "SEARCH":
       return Object.keys(notes).reduce((visNotes, id) => {
         if (
-          notes[id].body.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
-          notes[id].title.toLowerCase().indexOf(filter.toLowerCase()) > -1
+          notes[id].title.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
+          notes[id].body.text.toLowerCase().indexOf(filter.toLowerCase()) > -1
         ) {
           visNotes[id] = notes[id];
         }
@@ -25,11 +25,7 @@ export default (notes, { type, filter }) => {
       if (filter.size === 0) return notes;
 
       return Object.keys(notes).reduce((visNotes, id) => {
-        if (
-          Array.from(filter).every(
-            label => notes[id].labels.indexOf(label) > -1
-          )
-        ) {
+        if (Array.from(filter).every(label => notes[id].labels.indexOf(label) > -1)) {
           visNotes[id] = notes[id];
         }
         return visNotes;

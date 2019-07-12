@@ -8,20 +8,20 @@ export default class extends Component {
     const newId = Math.random();
     this.props.addNote({
       title: "",
-      body: "",
-      id: newId
+      body: {
+        text: "",
+        editObj: false,
+      },
+      id: newId,
+      labels: [],
+      bookmark: false,
     });
     this.props.openModalFor(newId);
   };
   render() {
     return (
       <div>
-        <Fab
-          className="add-note-btn"
-          color="inherit"
-          onClick={this.createNewNote}
-          aria-label="Add"
-        >
+        <Fab className="add-note-btn" color="inherit" onClick={this.createNewNote} aria-label="Add">
           <Icon>add</Icon>
         </Fab>
       </div>

@@ -1,11 +1,14 @@
 const initialState = {
   0: {
     title: "Заголовок",
-    body: "Напишите сюда что-то",
+    body: {
+      text: "Напишите сюда что-то",
+      editObj: false,
+    },
     id: 0,
     bookmark: true,
-    labels: []
-  }
+    labels: [],
+  },
 };
 export default function(state = initialState, { type, payload }) {
   switch (type) {
@@ -17,8 +20,8 @@ export default function(state = initialState, { type, payload }) {
         ...state,
         [payload.id]: {
           ...state[payload.id],
-          labels: newLabels
-        }
+          labels: newLabels,
+        },
       };
     case "REMOVE_LABEL":
       const note = state[payload.id];
@@ -27,18 +30,13 @@ export default function(state = initialState, { type, payload }) {
         ...state,
         [payload.id]: {
           ...note,
-          labels: [
-            ...note.labels.slice(0, index),
-            ...note.labels.slice(index + 1)
-          ]
-        }
+          labels: [...note.labels.slice(0, index), ...note.labels.slice(index + 1)],
+        },
       };
     case "REMOVE_LABEL_FOR_NOTES":
       return Object.keys(state).reduce(
         (newState, id) => {
-          const labels = state[id].labels.filter(
-            label => label !== payload.label
-          );
+          const labels = state[id].labels.filter(label => label !== payload.label);
           newState[id].labels = labels;
           return newState;
         },
@@ -48,6 +46,7 @@ export default function(state = initialState, { type, payload }) {
     case "SET_NOTES":
       return { ...payload.notes };
     case "EDIT_NOTE":
+      console.log(payload);
       return {
         ...state,
         [payload.id]: Object.keys(payload).reduce(
@@ -56,20 +55,20 @@ export default function(state = initialState, { type, payload }) {
             return newState;
           },
           { ...state[payload.id] }
-        )
+        ),
       };
     case "ADD_NOTE":
       return {
         ...state,
-        [payload.id]: payload
+        [payload.id]: payload,
       };
     case "BOOKMARK_TOGGLE":
       return {
         ...state,
         [payload.id]: {
           ...state[payload.id],
-          bookmark: !state[payload.id].bookmark
-        }
+          bookmark: !state[payload.id].bookmark,
+        },
       };
     case "REMOVE_NOTE":
       return Object.keys(state).reduce((newState, id) => {

@@ -10,15 +10,15 @@ export default class Labels extends Component {
     labelEditing: false,
     labelValue: "",
     compliteHash: new Set(),
-    cssEffect: false
+    cssEffect: false,
   };
   labelEditToggle = () => {
     this.setState(state => ({
-      labelEditing: !state.labelEditing
+      labelEditing: !state.labelEditing,
     }));
   };
   resetValue = () => {
-    this.setState({labelValue: ""});
+    this.setState({ labelValue: "" });
   };
   saveLabel = () => {
     this.labelEditToggle();
@@ -33,7 +33,7 @@ export default class Labels extends Component {
     console.log(value);
     if (value.length > 15) return;
     this.setState({
-      labelValue: value
+      labelValue: value,
     });
   };
   enterHandler = e => {
@@ -55,14 +55,15 @@ export default class Labels extends Component {
     }
     return value;
   }
-  animateInput(){
-    this.setState({cssEffect: true
-    }, () => setTimeout(() => this.setState({cssEffect: false}), 800));
+  animateInput() {
+    this.setState({ cssEffect: true }, () =>
+      setTimeout(() => this.setState({ cssEffect: false }), 800)
+    );
   }
   render() {
     const { labels, removeLabel, clickLabel } = this.props;
     const { labelEditing, labelValue } = this.state;
-
+    if (!labels) return null;
     return (
       <div>
         <div className="labels">
